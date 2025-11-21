@@ -101,7 +101,7 @@ contract AaveV3Adapter {
         uint[2] memory pA,
         uint[2][2] memory pB,
         uint[2] memory pC,
-        uint[3] memory pubSignals,
+        uint[5] memory pubSignals,
         address collateralAsset,
         uint256 collateralAmount,
         address borrowAsset,

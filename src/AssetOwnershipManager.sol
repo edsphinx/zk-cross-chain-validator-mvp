@@ -9,7 +9,7 @@ import "./AssetOwnershipVerifier.sol";
  * @dev Proves ownership without revealing balance amounts
  */
 contract AssetOwnershipManager {
-    Groth16Verifier public verifier;
+    AssetOwnershipGroth16Verifier public verifier;
 
     struct OwnershipProof {
         address account;
@@ -35,7 +35,7 @@ contract AssetOwnershipManager {
     );
 
     constructor(address _verifierAddress) {
-        verifier = Groth16Verifier(_verifierAddress);
+        verifier = AssetOwnershipGroth16Verifier(_verifierAddress);
     }
 
     /**
@@ -50,7 +50,7 @@ contract AssetOwnershipManager {
         uint[2] memory pA,
         uint[2][2] memory pB,
         uint[2] memory pC,
-        uint[2] memory pubSignals,
+        uint[4] memory pubSignals,
         address account
     ) public returns (bool) {
         bool isValid = verifier.verifyProof(pA, pB, pC, pubSignals);
@@ -96,7 +96,7 @@ contract AssetOwnershipManager {
         uint[2] memory pA,
         uint[2][2] memory pB,
         uint[2] memory pC,
-        uint[2] memory pubSignals
+        uint[4] memory pubSignals
     ) public view returns (bool) {
         return verifier.verifyProof(pA, pB, pC, pubSignals);
     }

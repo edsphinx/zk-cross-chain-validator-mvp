@@ -3,7 +3,7 @@ pragma solidity ^0.8.13;
 
 import "forge-std/Script.sol";
 
-// Verifier contracts
+// Verifier contracts (now with unique names)
 import "../src/Verifier.sol";
 import "../src/AssetOwnershipVerifier.sol";
 import "../src/TransactionExistenceVerifier.sol";
@@ -16,6 +16,7 @@ import "../src/AssetOwnershipManager.sol";
 import "../src/TransactionProofManager.sol";
 import "../src/VotingEligibilityManager.sol";
 import "../src/CollateralManager.sol";
+import "../src/AaveV3Adapter.sol";
 
 /**
  * @title DeployAllVerifiers
@@ -49,7 +50,7 @@ contract DeployAllVerifiers is Script {
 
         // 1. Account Balance Verification
         console.log("1/5 Deploying Account Balance Verification System...");
-        Groth16Verifier balanceVerifier = new Groth16Verifier();
+        BalanceGroth16Verifier balanceVerifier = new BalanceGroth16Verifier();
         BalanceVerifier balanceManager = new BalanceVerifier(address(balanceVerifier));
         console.log("  BalanceVerifier:", address(balanceVerifier));
         console.log("  BalanceManager:", address(balanceManager));
@@ -57,7 +58,7 @@ contract DeployAllVerifiers is Script {
 
         // 2. Asset Ownership Verification
         console.log("2/5 Deploying Asset Ownership Verification System...");
-        Groth16Verifier assetVerifier = new Groth16Verifier();
+        AssetOwnershipGroth16Verifier assetVerifier = new AssetOwnershipGroth16Verifier();
         AssetOwnershipManager assetManager = new AssetOwnershipManager(address(assetVerifier));
         console.log("  AssetOwnershipVerifier:", address(assetVerifier));
         console.log("  AssetOwnershipManager:", address(assetManager));
@@ -65,7 +66,7 @@ contract DeployAllVerifiers is Script {
 
         // 3. Transaction Existence Proof
         console.log("3/5 Deploying Transaction Existence Proof System...");
-        Groth16Verifier txVerifier = new Groth16Verifier();
+        TransactionExistenceGroth16Verifier txVerifier = new TransactionExistenceGroth16Verifier();
         TransactionProofManager txManager = new TransactionProofManager(address(txVerifier));
         console.log("  TransactionExistenceVerifier:", address(txVerifier));
         console.log("  TransactionProofManager:", address(txManager));
@@ -73,7 +74,7 @@ contract DeployAllVerifiers is Script {
 
         // 4. Voting Eligibility Verification
         console.log("4/5 Deploying Voting Eligibility Verification System...");
-        Groth16Verifier votingVerifier = new Groth16Verifier();
+        VotingEligibilityGroth16Verifier votingVerifier = new VotingEligibilityGroth16Verifier();
         VotingEligibilityManager votingManager = new VotingEligibilityManager(address(votingVerifier));
         console.log("  VotingEligibilityVerifier:", address(votingVerifier));
         console.log("  VotingEligibilityManager:", address(votingManager));
@@ -81,7 +82,7 @@ contract DeployAllVerifiers is Script {
 
         // 5. Collateral Verification
         console.log("5/5 Deploying Collateral Verification System...");
-        Groth16Verifier collateralVerifier = new Groth16Verifier();
+        CollateralGroth16Verifier collateralVerifier = new CollateralGroth16Verifier();
         CollateralManager collateralManager = new CollateralManager(address(collateralVerifier));
         console.log("  CollateralVerifier:", address(collateralVerifier));
         console.log("  CollateralManager:", address(collateralManager));

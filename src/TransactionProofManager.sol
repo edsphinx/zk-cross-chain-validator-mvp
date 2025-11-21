@@ -9,7 +9,7 @@ import "./TransactionExistenceVerifier.sol";
  * @dev Proves transaction occurred without revealing details
  */
 contract TransactionProofManager {
-    Groth16Verifier public verifier;
+    TransactionExistenceGroth16Verifier public verifier;
 
     struct TransactionProof {
         uint256 merkleRoot;
@@ -34,7 +34,7 @@ contract TransactionProofManager {
     );
 
     constructor(address _verifierAddress) {
-        verifier = Groth16Verifier(_verifierAddress);
+        verifier = TransactionExistenceGroth16Verifier(_verifierAddress);
     }
 
     /**
@@ -48,10 +48,10 @@ contract TransactionProofManager {
         uint[2] memory pA,
         uint[2][2] memory pB,
         uint[2] memory pC,
-        uint[3] memory pubSignals
+        uint[4] memory pubSignals
     ) public returns (bool) {
         // Convert pubSignals to uint[2] array for verifier
-        uint[2] memory verifierSignals = [pubSignals[0], pubSignals[1]];
+        uint[4] memory verifierSignals = [pubSignals[0], pubSignals[1], pubSignals[2], pubSignals[3]];
         bool isValid = verifier.verifyProof(pA, pB, pC, verifierSignals);
 
         uint256 merkleRoot = pubSignals[0];

@@ -34,7 +34,7 @@ contract DeployBalanceVerifier is Script {
 
         // Step 1: Deploy the Groth16Verifier
         console.log("Deploying Groth16Verifier...");
-        Groth16Verifier verifier = new Groth16Verifier();
+        BalanceGroth16Verifier verifier = new BalanceGroth16Verifier();
         console.log("Groth16Verifier deployed at:", address(verifier));
 
         // Step 2: Deploy the BalanceVerifier

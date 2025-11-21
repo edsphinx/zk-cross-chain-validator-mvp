@@ -11,7 +11,7 @@ import "../src/BalanceVerifier.sol";
  * @dev Tests include deployment, proof verification, and state management
  */
 contract BalanceVerifierTest is Test {
-    Groth16Verifier public verifier;
+    BalanceGroth16Verifier public verifier;
     BalanceVerifier public balanceVerifier;
 
     address public user1 = address(0x1);
@@ -32,7 +32,7 @@ contract BalanceVerifierTest is Test {
 
     function setUp() public {
         // Deploy the Groth16Verifier
-        verifier = new Groth16Verifier();
+        verifier = new BalanceGroth16Verifier();
 
         // Deploy the BalanceVerifier with the verifier address
         balanceVerifier = new BalanceVerifier(address(verifier));
@@ -68,9 +68,10 @@ contract BalanceVerifierTest is Test {
             uint(2)
         ];
 
-        uint[2] memory pubSignals = [
+        uint[3] memory pubSignals = [
             uint(500000),  // threshold
-            uint(12345678901234567890)  // accountHash
+            uint(12345678901234567890),  // accountHash
+            uint(0)  // padding
         ];
 
         // Note: This test will fail with these dummy values because they don't
@@ -91,7 +92,7 @@ contract BalanceVerifierTest is Test {
         uint[2] memory pA = [uint(1), uint(2)];
         uint[2][2] memory pB = [[uint(1), uint(2)], [uint(3), uint(4)]];
         uint[2] memory pC = [uint(1), uint(2)];
-        uint[2] memory pubSignals = [uint(500000), uint(12345678901234567890)];
+        uint[3] memory pubSignals = [uint(500000), uint(12345678901234567890), uint(0)];
 
         // This will return false for invalid proof, but shouldn't revert
         bool result = balanceVerifier.verifyProofOnly(pA, pB, pC, pubSignals);
@@ -202,7 +203,7 @@ contract BalanceVerifierTest is Test {
         uint[2] memory pA = [uint(1), uint(2)];
         uint[2][2] memory pB = [[uint(1), uint(2)], [uint(3), uint(4)]];
         uint[2] memory pC = [uint(1), uint(2)];
-        uint[2] memory pubSignals = [uint(500000), uint(12345678901234567890)];
+        uint[3] memory pubSignals = [uint(500000), uint(12345678901234567890), uint(0)];
 
         // Measure gas for view function
         uint256 gasBefore = gasleft();

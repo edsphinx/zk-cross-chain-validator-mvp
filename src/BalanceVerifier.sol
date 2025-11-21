@@ -11,7 +11,7 @@ import "./Verifier.sol";
  */
 contract BalanceVerifier {
     // Reference to the ZK proof verifier contract
-    Groth16Verifier public verifier;
+    BalanceGroth16Verifier public verifier;
 
     // Struct to store verification result
     struct BalanceProof {
@@ -44,7 +44,7 @@ contract BalanceVerifier {
      * @param _verifierAddress Address of the deployed Groth16Verifier contract
      */
     constructor(address _verifierAddress) {
-        verifier = Groth16Verifier(_verifierAddress);
+        verifier = BalanceGroth16Verifier(_verifierAddress);
     }
 
     /**
@@ -60,7 +60,7 @@ contract BalanceVerifier {
         uint[2] memory pA,
         uint[2][2] memory pB,
         uint[2] memory pC,
-        uint[2] memory pubSignals,
+        uint[3] memory pubSignals,
         address account
     ) public returns (bool) {
         // Verify the ZK proof
@@ -142,7 +142,7 @@ contract BalanceVerifier {
         uint[2] memory pA,
         uint[2][2] memory pB,
         uint[2] memory pC,
-        uint[2] memory pubSignals
+        uint[3] memory pubSignals
     ) public view returns (bool) {
         return verifier.verifyProof(pA, pB, pC, pubSignals);
     }

@@ -9,7 +9,7 @@ import "./CollateralVerifier.sol";
  * @dev Proves sufficient collateral without revealing exact amounts
  */
 contract CollateralManager {
-    Groth16Verifier public verifier;
+    CollateralGroth16Verifier public verifier;
 
     struct CollateralProof {
         address borrower;
@@ -52,7 +52,7 @@ contract CollateralManager {
     );
 
     constructor(address _verifierAddress) {
-        verifier = Groth16Verifier(_verifierAddress);
+        verifier = CollateralGroth16Verifier(_verifierAddress);
     }
 
     /**
@@ -67,10 +67,10 @@ contract CollateralManager {
         uint[2] memory pA,
         uint[2][2] memory pB,
         uint[2] memory pC,
-        uint[3] memory pubSignals
+        uint[5] memory pubSignals
     ) public returns (uint256) {
         // Convert to uint[2] for verifier
-        uint[2] memory verifierSignals = [pubSignals[0], pubSignals[1]];
+        uint[5] memory verifierSignals = [pubSignals[0], pubSignals[1], pubSignals[2], pubSignals[3], pubSignals[4]];
         bool isValid = verifier.verifyProof(pA, pB, pC, verifierSignals);
 
         uint256 requiredCollateral = pubSignals[0];
@@ -154,7 +154,7 @@ contract CollateralManager {
         uint[2] memory pA,
         uint[2][2] memory pB,
         uint[2] memory pC,
-        uint[2] memory pubSignals
+        uint[5] memory pubSignals
     ) public view returns (bool) {
         return verifier.verifyProof(pA, pB, pC, pubSignals);
     }
