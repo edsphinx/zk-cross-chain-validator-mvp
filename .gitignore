@@ -18,13 +18,20 @@ docs/
 .env
 frontend/.env.local
 
-# ZK Proof Build Artifacts
+# ZK Proof Build Artifacts (local development only)
 circuits/build_*/
 circuits/*.ptau
 *.r1cs
 *.sym
-*.wasm
 circom2
+
+# Ignore WASM files in root and circuits dir, but NOT in frontend/public
+/*.wasm
+/circuits/*.wasm
+/test.wasm
+
+# Frontend public circuits should be committed for production
+# !frontend/public/circuits/*.wasm
 
 # Test Reports
 test-reports/
