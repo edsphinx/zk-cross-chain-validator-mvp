@@ -9,7 +9,11 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run test:circuit && npm run test:contracts",
+    "test:circuit": "mocha test/circuit.test.js",
+    "test:contracts": "forge test",
+    "generate-proof": "node scripts/generateProof.js",
+    "verify-onchain": "node scripts/verifyOnChain.js"
   },
   "keywords": [],
   "author": "",
@@ -17,5 +21,12 @@
   "dependencies": {
     "dotenv": "^16.4.7",
     "ethers": "^6.13.5"
+  },
+  "devDependencies": {
+    "chai": "^6.2.1",
+    "circom_tester": "^0.0.24",
+    "circomlib": "^2.0.5",
+    "mocha": "^11.7.5",
+    "snarkjs": "^0.7.5"
   }
 }
