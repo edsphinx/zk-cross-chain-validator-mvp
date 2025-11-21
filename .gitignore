@@ -17,3 +17,14 @@ docs/
 .env
 .env
 frontend/.env.local
+
+# ZK Proof Build Artifacts
+circuits/build_*/
+circuits/*.ptau
+*.r1cs
+*.sym
+*.wasm
+circom2
+
+# Test Reports
+test-reports/

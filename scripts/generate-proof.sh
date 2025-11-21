@@ -51,15 +51,19 @@ mkdir -p "$BUILD_DIR"
 
 echo -e "${YELLOW}[2/6]${NC} Compiling circuit with circom..."
 
-# Check if circom is installed
-if ! command -v circom &> /dev/null; then
-    echo "❌ Error: circom not installed"
-    echo "Install with: npm install -g circom"
-    exit 1
+# Check if circom 2.x is available, if not download it
+CIRCOM_BIN="/usr/local/bin/circom2"
+if [ ! -f "$CIRCOM_BIN" ]; then
+    CIRCOM_BIN="./circom2"
+    if [ ! -f "$CIRCOM_BIN" ]; then
+        echo "  Downloading circom 2.x..."
+        curl -fsSL https://github.com/iden3/circom/releases/download/v2.1.9/circom-linux-amd64 -o "$CIRCOM_BIN"
+        chmod +x "$CIRCOM_BIN"
+    fi
 fi
 
 # Compile circuit
-circom "$CIRCUIT_FILE" \
+"$CIRCOM_BIN" "$CIRCUIT_FILE" \
     --r1cs \
     --wasm \
     --sym \
@@ -80,28 +84,26 @@ if [ -z "$INPUT_FILE" ]; then
 {
     "balance": "5000000000",
     "threshold": "2000000000",
-    "accountHash": "12345678901234567890",
-    "nonce": "1"
+    "accountHash": "12345678901234567890"
 }
 EOF
             ;;
         "AssetOwnership")
             cat > "$INPUT_FILE" << EOF
 {
-    "tokenId": "1234",
-    "ownerAddress": "0x1234567890123456789012345678901234567890",
-    "contractAddress": "0xabcdefabcdefabcdefabcdefabcdefabcdefabcd",
-    "blockNumber": "1000000"
+    "assetBalance": "1000000000000000000",
+    "assetId": "12345",
+    "accountHash": "67890"
 }
 EOF
             ;;
         "TransactionExistence")
             cat > "$INPUT_FILE" << EOF
 {
-    "txHash": "0xabcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890",
+    "txHash": "123456789",
+    "merkleRoot": "987654321",
     "blockNumber": "1000000",
-    "fromAddress": "0x1234567890123456789012345678901234567890",
-    "toAddress": "0xabcdefabcdefabcdefabcdefabcdefabcdefabcd"
+    "chainId": "534351"
 }
 EOF
             ;;
@@ -109,21 +111,19 @@ EOF
             cat > "$INPUT_FILE" << EOF
 {
     "tokenBalance": "10000000000000000000000",
-    "votingPower": "100",
-    "minimumBalance": "5000000000000000000000",
-    "blockNumber": "1000000",
-    "voterAddress": "0x1234567890123456789012345678901234567890"
+    "votingThreshold": "5000000000000000000000",
+    "proposalId": "1",
+    "accountHash": "123456789"
 }
 EOF
             ;;
         "CollateralVerification")
             cat > "$INPUT_FILE" << EOF
 {
-    "collateralAmount": "5000000000",
-    "borrowAmount": "2000000000",
-    "healthFactor": "2500000000000000000",
-    "ltv": "8000",
-    "userAddress": "0x1234567890123456789012345678901234567890"
+    "collateralValue": "5000000000",
+    "requiredCollateral": "3000000000",
+    "loanAmount": "2000000000",
+    "accountHash": "123456789"
 }
 EOF
             ;;
