@@ -12,7 +12,12 @@
     "test": "npm run test:circuit && npm run test:contracts",
     "test:circuit": "mocha test/circuit.test.js",
     "test:contracts": "forge test",
-    "generate-proof": "node scripts/generateProof.js",
+    "generate-proof": "node scripts/generateAllProofs.js",
+    "generate:balance": "node scripts/generateAllProofs.js balance",
+    "generate:asset": "node scripts/generateAllProofs.js asset",
+    "generate:transaction": "node scripts/generateAllProofs.js transaction",
+    "generate:voting": "node scripts/generateAllProofs.js voting",
+    "generate:collateral": "node scripts/generateAllProofs.js collateral",
     "verify-onchain": "node scripts/verifyOnChain.js"
   },
   "keywords": [],

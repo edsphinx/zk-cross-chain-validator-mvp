@@ -1,0 +1,11 @@
+1,1,0,main.txHash
+2,2,0,main.merkleRoot
+3,3,0,main.blockNumber
+4,4,0,main.chainId
+5,8,0,main.txSquared
+6,9,0,main.txCheck
+7,10,0,main.verification
+8,5,0,main.rootSquared
+9,11,0,main.combined
+10,6,0,main.blockChainProduct
+11,7,0,main.finalCheck

@@ -1,0 +1,9 @@
+1,2,0,main.assetBalance
+2,3,0,main.assetId
+3,4,0,main.accountHash
+4,1,0,main.isOwner
+5,7,0,main.balanceSquared
+6,8,0,main.temp
+7,9,0,main.verification
+8,5,0,main.assetCheck
+9,6,0,main.finalCheck
