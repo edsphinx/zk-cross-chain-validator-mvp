@@ -5,6 +5,7 @@ export interface Token {
   address: string;
   decimals: number;
   icon: string;
+  iconUrl: string;
   coingeckoId?: string;
 }
 
@@ -16,6 +17,7 @@ export const TOKENS: Record<string, Token> = {
     address: '0x2C9678042D52B97D27f2bD2947F7111d93F3dD0D',
     decimals: 6,
     icon: '💵',
+    iconUrl: 'https://app.aave.com/icons/tokens/usdc.svg',
     coingeckoId: 'usd-coin'
   },
   DAI: {
@@ -24,6 +26,7 @@ export const TOKENS: Record<string, Token> = {
     address: '0x7984E363c38b590bB4CA35aEd5133Ef2c6619C40',
     decimals: 18,
     icon: '🪙',
+    iconUrl: 'https://app.aave.com/icons/tokens/dai.svg',
     coingeckoId: 'dai'
   },
   WETH: {
@@ -32,6 +35,7 @@ export const TOKENS: Record<string, Token> = {
     address: '0xb123dCe044EdF0a755505d9623Fba16C0F41cae9',
     decimals: 18,
     icon: '💎',
+    iconUrl: 'https://app.aave.com/icons/tokens/weth.svg',
     coingeckoId: 'weth'
   },
   WBTC: {
@@ -40,6 +44,7 @@ export const TOKENS: Record<string, Token> = {
     address: '0x5ea79f3190ff37418d42f9b2618688494dbd9693',
     decimals: 8,
     icon: '₿',
+    iconUrl: 'https://app.aave.com/icons/tokens/wbtc.svg',
     coingeckoId: 'wrapped-bitcoin'
   },
   AAVE: {
@@ -48,6 +53,7 @@ export const TOKENS: Record<string, Token> = {
     address: '0xfc2921be7b2762f0e87039905d6019b0ff5978a8',
     decimals: 18,
     icon: '🔷',
+    iconUrl: 'https://app.aave.com/icons/tokens/aave.svg',
     coingeckoId: 'aave'
   },
   LINK: {
@@ -56,6 +62,7 @@ export const TOKENS: Record<string, Token> = {
     address: '0x279cbf5b7e3651f03cb9b71a9e7a3c924b267801',
     decimals: 18,
     icon: '🔗',
+    iconUrl: 'https://app.aave.com/icons/tokens/link.svg',
     coingeckoId: 'chainlink'
   },
   USDT: {
@@ -64,6 +71,7 @@ export const TOKENS: Record<string, Token> = {
     address: '0x186c0c26c45a8da1da34339ee513624a9609156d',
     decimals: 6,
     icon: '💲',
+    iconUrl: 'https://app.aave.com/icons/tokens/usdt.svg',
     coingeckoId: 'tether'
   },
   EURS: {
@@ -72,6 +80,7 @@ export const TOKENS: Record<string, Token> = {
     address: '0xdf40f3a3566b4271450083f1ad5732590ba47575',
     decimals: 2,
     icon: '€',
+    iconUrl: 'https://app.aave.com/icons/tokens/eurs.svg',
     coingeckoId: 'stasis-eurs'
   }
 };
