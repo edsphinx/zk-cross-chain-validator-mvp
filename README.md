@@ -1,5 +1,15 @@
 # zk-Cross-Chain Validator MVP
 
+> ⚠️ **PROJECT ARCHIVED - November 21, 2025**
+>
+> This project has been archived due to lack of market validation and no clear product-market fit. The technology works correctly, but there is no evidence of real user demand. Grant funding applications were rejected.
+>
+> **Status:** Technical demonstration only. No further development planned.
+>
+> See [PROJECT_ARCHIVE.md](PROJECT_ARCHIVE.md) for full details and lessons learned.
+
+---
+
 A proof-of-concept project that demonstrates secure, privacy-preserving, and cost-effective cross-chain validation using zero-knowledge proofs (zk-SNARKs) on Layer 2. This MVP is built with a modular architecture to enable future expansion of data input use cases.
 
 ## Overview
