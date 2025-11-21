@@ -11,7 +11,15 @@ source .env
 
 # Scroll Sepolia Explorer API
 EXPLORER_URL="https://api-sepolia.scrollscan.com/api"
-ETHERSCAN_API_KEY=${ETHERSCAN_API_KEY}
+
+# Use global ETHERSCAN_V2_API if available, otherwise fall back to .env
+if [ -n "$ETHERSCAN_V2_API" ]; then
+    ETHERSCAN_API_KEY=${ETHERSCAN_V2_API}
+    echo "Using ETHERSCAN_V2_API"
+else
+    ETHERSCAN_API_KEY=${ETHERSCAN_API_KEY}
+    echo "Using ETHERSCAN_API_KEY from .env"
+fi
 
 # Check if addresses are set
 if [ -z "$BALANCE_MANAGER_ADDRESS" ]; then
