@@ -84,8 +84,9 @@ Each use case is isolated in its own circuit, enabling independent development a
  zk-cross-chain-validator/
  ├── contracts/         # Contratos Solidity (por ejemplo, Verifier.sol)
  ├── circuits/          # Archivos de los zk-circuits (ej. AccountBalanceProof.circom)
- ├── script/            # Scripts de despliegue e integración (ej. deploy.s.sol, verifyProof.js)
- ├── src/               # Scripts de despliegue e integración (ej. deploy.s.sol, verifyProof.js)
+ ├── script/            # Scripts de despliegue Solidity (ej. DeployAllVerifiers.s.sol)
+ ├── scripts/           # Scripts de automatización (bash y Node.js)
+ ├── src/               # Contratos inteligentes principales
  ├── tests/             # Pruebas unitarias (por ejemplo, tests con Foundry)
  ├── docs/              # Documentación adicional y diagramas
  ├── .gitignore         # Ignorar archivos innecesarios (Node, compilados, etc.)
@@ -127,7 +128,7 @@ For each use case, compile the corresponding zk circuit. For example, for Accoun
    Run the integration script to submit the proof and public inputs:
 
    ```bash
-   node scripts/verifyProof.js --contract <deployed_address> --proof proof.json --public public.json
+   node scripts/verify-on-chain.js --contract <deployed_address> --proof proof.json --public public.json
    ```
 
 ### Testing

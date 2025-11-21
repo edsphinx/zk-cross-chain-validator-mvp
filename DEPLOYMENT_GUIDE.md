@@ -79,7 +79,7 @@ After generating proofs, submit them:
 echo "CONTRACT_ADDRESS=<YOUR_BALANCE_MANAGER_ADDRESS>" >> .env
 
 # Submit proof (example with balance)
-node scripts/verifyOnChain.js submit
+node scripts/verify-on-chain.js submit
 ```
 
 This creates a transaction on Scroll Sepolia that you can view in block explorer.
@@ -182,7 +182,7 @@ Search for your contract addresses and verify they're deployed.
 for i in {1..5}; do
   npm run generate:balance $((1000000 + i*100000)) 500000 $i
   # Submit each proof
-  node scripts/verifyOnChain.js submit
+  node scripts/verify-on-chain.js submit
   sleep 5
 done
 ```
@@ -347,7 +347,7 @@ npm run generate:voting 10000 1000 42 11111
 npm run generate:collateral 150000 100000 50000 22222
 
 # Verify on-chain
-node scripts/verifyOnChain.js submit
+node scripts/verify-on-chain.js submit
 
 # Run frontend
 cd frontend && npm run dev
