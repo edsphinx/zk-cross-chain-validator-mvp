@@ -32,15 +32,26 @@ import "../src/AaveV3Adapter.sol";
  */
 contract DeployAllVerifiers is Script {
     function run() external {
-        // Try SCROLL_SEPOLIA_DEPLOY_PK first, fallback to PRIVATE_KEY
+        // Read private key as string (supports both with and without 0x prefix)
         uint256 deployerPrivateKey;
-        try vm.envUint("SCROLL_SEPOLIA_DEPLOY_PK") returns (uint256 key) {
-            deployerPrivateKey = key;
+        string memory pkString;
+
+        try vm.envString("SCROLL_SEPOLIA_DEPLOY_PK") returns (string memory key) {
+            pkString = key;
             console.log("Using SCROLL_SEPOLIA_DEPLOY_PK");
         } catch {
-            deployerPrivateKey = vm.envUint("PRIVATE_KEY");
-            console.log("Using PRIVATE_KEY");
+            try vm.envString("PRIVATE_KEY") returns (string memory key) {
+                pkString = key;
+                console.log("Using PRIVATE_KEY");
+            } catch {
+                revert("No private key found in environment");
+            }
         }
+
+        // Convert string to uint256
+        // vm.envString strips "0x" prefix, so we need to add it back for parseUint
+        string memory pkWithPrefix = string(abi.encodePacked("0x", pkString));
+        deployerPrivateKey = vm.parseUint(pkWithPrefix);
 
         vm.startBroadcast(deployerPrivateKey);
 
