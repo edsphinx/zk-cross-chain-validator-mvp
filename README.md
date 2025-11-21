@@ -1,5 +1,15 @@
 # zk-Cross-Chain Validator MVP
 
+> ⚠️ **PROJECT ARCHIVED - November 21, 2025**
+>
+> This project has been archived due to lack of market validation and no clear product-market fit. The technology works correctly, but there is no evidence of real user demand. Grant funding applications were rejected.
+>
+> **Status:** Technical demonstration only. No further development planned.
+>
+> See [PROJECT_ARCHIVE.md](PROJECT_ARCHIVE.md) for full details and lessons learned.
+
+---
+
 A proof-of-concept project that demonstrates secure, privacy-preserving, and cost-effective cross-chain validation using zero-knowledge proofs (zk-SNARKs) on Layer 2. This MVP is built with a modular architecture to enable future expansion of data input use cases.
 
 ## Overview
@@ -84,8 +94,9 @@ Each use case is isolated in its own circuit, enabling independent development a
  zk-cross-chain-validator/
  ├── contracts/         # Contratos Solidity (por ejemplo, Verifier.sol)
  ├── circuits/          # Archivos de los zk-circuits (ej. AccountBalanceProof.circom)
- ├── script/            # Scripts de despliegue e integración (ej. deploy.s.sol, verifyProof.js)
- ├── src/               # Scripts de despliegue e integración (ej. deploy.s.sol, verifyProof.js)
+ ├── script/            # Scripts de despliegue Solidity (ej. DeployAllVerifiers.s.sol)
+ ├── scripts/           # Scripts de automatización (bash y Node.js)
+ ├── src/               # Contratos inteligentes principales
  ├── tests/             # Pruebas unitarias (por ejemplo, tests con Foundry)
  ├── docs/              # Documentación adicional y diagramas
  ├── .gitignore         # Ignorar archivos innecesarios (Node, compilados, etc.)
@@ -127,7 +138,7 @@ For each use case, compile the corresponding zk circuit. For example, for Accoun
    Run the integration script to submit the proof and public inputs:
 
    ```bash
-   node scripts/verifyProof.js --contract <deployed_address> --proof proof.json --public public.json
+   node scripts/verify-on-chain.js --contract <deployed_address> --proof proof.json --public public.json
    ```
 
 ### Testing
@@ -157,9 +168,58 @@ With additional support, the project will evolve as follows:
 5. **Enhanced Security & Scalability:**
    Conduct comprehensive audits and optimize the system for production deployment.
 
+## 📚 Documentation
+
+| Document | Purpose |
+|----------|---------|
+| **[DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md)** | Deploy and verify contracts |
+| **[scripts/README.md](./scripts/README.md)** | Test scripts and automation |
+| **[frontend/README.md](./frontend/README.md)** | Frontend setup and usage |
+| **[CONTRIBUTING.md](./CONTRIBUTING.md)** | How to contribute |
+
+## 🚀 Quick Start
+
+### Generate ZK Proofs (No Installation Required)
+
+```bash
+# Start frontend
+cd frontend
+npm install
+npm run dev
+
+# Visit http://localhost:3000/proof-generator
+# - Select proof type
+# - Enter inputs
+# - Generate proof in browser (2-5 seconds)
+```
+
+### Run Complete Test Suite
+
+```bash
+./scripts/run-full-test-suite.sh
+```
+
+### Test Aave Integration
+
+```bash
+./scripts/test-aave-integration.sh YOUR_WALLET_ADDRESS
+```
+
+## 📊 Current Status
+
+✅ **Production-Ready Testnet**
+
+- 11/11 contracts deployed & verified on Scroll Sepolia
+- 5/5 ZK circuits generating real proofs
+- Browser-based proof generation (zero installation)
+- Live Aave V3 integration
+- 83% test pass rate
+
+See [DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md) for deployed addresses.
+
 ## Contributing
 
-Contributions are welcome! Please open issues or submit pull requests with enhancements, bug fixes, or suggestions.
+Contributions are welcome! Please see [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines.
 
 ## License
 

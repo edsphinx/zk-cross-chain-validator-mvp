@@ -1,0 +1,10 @@
+1,2,0,main.tokenBalance
+2,3,0,main.votingThreshold
+3,4,0,main.proposalId
+4,5,0,main.accountHash
+5,1,0,main.isEligible
+6,8,0,main.difference
+7,9,0,main.balanceCheck
+8,10,0,main.proposalCheck
+9,6,0,main.balanceSquared
+10,7,0,main.finalCheck

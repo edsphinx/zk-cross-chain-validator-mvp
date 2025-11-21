@@ -1,0 +1,11 @@
+1,2,0,main.collateralValue
+2,3,0,main.requiredCollateral
+3,4,0,main.loanAmount
+4,5,0,main.accountHash
+5,1,0,main.isSufficient
+6,9,0,main.difference
+7,10,0,main.collateralCheck
+8,11,0,main.loanSquared
+9,6,0,main.accountSquared
+10,7,0,main.collateralSquared
+11,8,0,main.finalVerification

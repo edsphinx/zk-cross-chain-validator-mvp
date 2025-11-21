@@ -1,0 +1,6 @@
+1,1,0,main.balance
+2,2,0,main.threshold
+3,3,0,main.accountHash
+4,5,0,main.difference
+5,4,0,main.accountHashSquared
+6,6,0,main.balanceCheck

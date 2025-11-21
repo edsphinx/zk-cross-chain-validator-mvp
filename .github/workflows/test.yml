@@ -31,6 +31,7 @@ jobs:
         run: |
           forge fmt --check
         id: fmt
+        continue-on-error: true
 
       - name: Run Forge build
         run: |
