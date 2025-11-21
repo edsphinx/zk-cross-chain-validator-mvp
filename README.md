@@ -157,9 +157,58 @@ With additional support, the project will evolve as follows:
 5. **Enhanced Security & Scalability:**
    Conduct comprehensive audits and optimize the system for production deployment.
 
+## 📚 Documentation
+
+| Document | Purpose |
+|----------|---------|
+| **[DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md)** | Deploy and verify contracts |
+| **[scripts/README.md](./scripts/README.md)** | Test scripts and automation |
+| **[frontend/README.md](./frontend/README.md)** | Frontend setup and usage |
+| **[CONTRIBUTING.md](./CONTRIBUTING.md)** | How to contribute |
+
+## 🚀 Quick Start
+
+### Generate ZK Proofs (No Installation Required)
+
+```bash
+# Start frontend
+cd frontend
+npm install
+npm run dev
+
+# Visit http://localhost:3000/proof-generator
+# - Select proof type
+# - Enter inputs
+# - Generate proof in browser (2-5 seconds)
+```
+
+### Run Complete Test Suite
+
+```bash
+./scripts/run-full-test-suite.sh
+```
+
+### Test Aave Integration
+
+```bash
+./scripts/test-aave-integration.sh YOUR_WALLET_ADDRESS
+```
+
+## 📊 Current Status
+
+✅ **Production-Ready Testnet**
+
+- 11/11 contracts deployed & verified on Scroll Sepolia
+- 5/5 ZK circuits generating real proofs
+- Browser-based proof generation (zero installation)
+- Live Aave V3 integration
+- 83% test pass rate
+
+See [DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md) for deployed addresses.
+
 ## Contributing
 
-Contributions are welcome! Please open issues or submit pull requests with enhancements, bug fixes, or suggestions.
+Contributions are welcome! Please see [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines.
 
 ## License
 
