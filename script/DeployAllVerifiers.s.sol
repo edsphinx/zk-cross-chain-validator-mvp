@@ -31,7 +31,16 @@ import "../src/CollateralManager.sol";
  */
 contract DeployAllVerifiers is Script {
     function run() external {
-        uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
+        // Try SCROLL_SEPOLIA_DEPLOY_PK first, fallback to PRIVATE_KEY
+        uint256 deployerPrivateKey;
+        try vm.envUint("SCROLL_SEPOLIA_DEPLOY_PK") returns (uint256 key) {
+            deployerPrivateKey = key;
+            console.log("Using SCROLL_SEPOLIA_DEPLOY_PK");
+        } catch {
+            deployerPrivateKey = vm.envUint("PRIVATE_KEY");
+            console.log("Using PRIVATE_KEY");
+        }
+
         vm.startBroadcast(deployerPrivateKey);
 
         console.log("========================================");
@@ -78,6 +87,13 @@ contract DeployAllVerifiers is Script {
         console.log("  CollateralManager:", address(collateralManager));
         console.log("  Status: DEPLOYED\n");
 
+        // 6. Aave V3 Integration Adapter
+        console.log("BONUS: Deploying Aave V3 Integration Adapter...");
+        AaveV3Adapter aaveAdapter = new AaveV3Adapter(address(collateralManager));
+        console.log("  AaveV3Adapter:", address(aaveAdapter));
+        console.log("  Integrated with Aave Pool: 0x48914C788295b5db23aF2b5F0B3BE775C4eA9440");
+        console.log("  Status: DEPLOYED\n");
+
         vm.stopBroadcast();
 
         // Deployment Summary
@@ -111,10 +127,18 @@ contract DeployAllVerifiers is Script {
         console.log("COLLATERAL_MANAGER_ADDRESS=", address(collateralManager));
         console.log("");
 
+        console.log("# Aave V3 Integration");
+        console.log("AAVE_ADAPTER_ADDRESS=", address(aaveAdapter));
+        console.log("");
+
         console.log("========================================");
-        console.log("Total Contracts Deployed: 10");
+        console.log("Total Contracts Deployed: 11");
         console.log("  - 5 ZK Verifiers (Groth16)");
         console.log("  - 5 Manager Contracts");
+        console.log("  - 1 Aave V3 Adapter (DeFi Integration)");
         console.log("========================================");
+        console.log("\nREAL DEFI INTEGRATION:");
+        console.log("  Use AaveV3Adapter to borrow from Aave");
+        console.log("  with ZK collateral proofs on Scroll Sepolia!");
     }
 }
